@@ -966,3 +966,33 @@ describe('Linear Scale', function() {
 		expect(chart.scales['x-axis-0'].max).toEqual(21);
 	});
 });
+
+	it('max should be used if it is zero', function() {
+		var barData = {
+			labels: ['S1', 'S2', 'S3'],
+			datasets: [{
+				label: 'dataset 1',
+				backgroundColor: '#382765',
+				data: [-2500, -2000, -1500],
+				hidden: true,
+			}]
+		};
+
+		var chart = window.acquireChart({
+			type: 'horizontalBar',
+			data: barData,
+			options: {
+				scales: {
+					xAxes: [{
+						ticks: {
+							min: -3000,
+							max: 0
+						}
+					}]
+				}
+			}
+		});
+
+		expect(chart.scales['x-axis-0'].max).toEqual(0);
+	});
+});
